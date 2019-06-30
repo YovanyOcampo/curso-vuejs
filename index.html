@@ -10,9 +10,13 @@
     <div id="app">
         <template v-if="mostrar">
             <div v-show="mostrar2">
-                <h1>{{titulo | uppercase}}</h1>
-                <h2>{{subtitulo | lowercase}}</h2>
+                <button v-on:click="incrementar">Incrementar</button>
+                <button @click="contador--">Decrementar</button>
+                <!-- <h1>{{titulo | uppercase}}</h1>
+                <h2>{{subtitulo | lowercase | uppercase}}</h2> -->
                 <!-- <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>   -->
+                Contador: {{contador}}
+
             </div>
         </template>
     </div>
@@ -21,13 +25,14 @@
         var app = new Vue({
             el: '#app',
             data: {
+                contador: 0,
                 nombre: 'Yovany',
                 pagina: 'Google',
                 url: 'https://google.com',
                 mostrar: true,
                 mostrar2: true,
-                titulo = "Este es el titulo",
-                subtitulo = "Este es el subtitulo"
+                titulo: 'Este es mi titulo',
+                subtitulo: 'Este es mi subtitulo',
             }, 
             filters: {
                 uppercase: function(str) {
@@ -35,6 +40,14 @@
                 },
                 lowercase: function(str) {
                     return str.toLowerCase()
+                }
+            }, 
+            methods: {
+                incrementar: function() {
+                    this.contador ++;
+                },
+                decrementar: function() {
+                    this.contador --;
                 }
             }
         })
