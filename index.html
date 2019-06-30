@@ -10,13 +10,26 @@
     <div id="app">
         <template v-if="mostrar">
             <div v-show="mostrar2">
-                <button v-on:click="incrementar">Incrementar</button>
-                <button @click="contador--">Decrementar</button>
+                <!-- <button v-on:click="incrementar">Incrementar</button>
+                <button @click="contador--">Decrementar</button> -->
                 <!-- <h1>{{titulo | uppercase}}</h1>
                 <h2>{{subtitulo | lowercase | uppercase}}</h2> -->
                 <!-- <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>   -->
-                Contador: {{contador}}
-
+                <!-- Contador: {{contador}} -->
+                <input type="text" name="name" 
+                        placeholder="Ingresa tu nombre"
+                        v-model="name">
+                <p>Nombre en mayuscula {{name | uppercase}}</p>
+                <form v-on:submit.prevent="submit" action="" method="GET">
+                    <h2>Datos</h2>
+                    <input v-model="cursos" type="checkbox" id="vue" value="vue">
+                    <label for="vue">Curso de Vue.js</label>
+                    <input v-model="cursos" type="checkbox" id="seo" value="seo">
+                    <label for="seo">Curso de SEO</label>
+                    <input v-model="cursos" type="checkbox" id="react" value="react">
+                    <label for="react">Curso de React.js</label>
+                    <button type="submit">Enviar</button>
+                </form>
             </div>
         </template>
     </div>
@@ -27,12 +40,14 @@
             data: {
                 contador: 0,
                 nombre: 'Yovany',
+                name: '',
                 pagina: 'Google',
                 url: 'https://google.com',
                 mostrar: true,
                 mostrar2: true,
                 titulo: 'Este es mi titulo',
                 subtitulo: 'Este es mi subtitulo',
+                cursos: []
             }, 
             filters: {
                 uppercase: function(str) {
@@ -48,6 +63,10 @@
                 },
                 decrementar: function() {
                     this.contador --;
+                },
+                submit: function() {
+                    console.log("On submit method");
+                    console.log(this.cursos);
                 }
             }
         })
