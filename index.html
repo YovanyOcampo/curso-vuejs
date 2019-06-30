@@ -8,30 +8,32 @@
 </head>
 <body>
     <div id="app">
-        <template v-if="mostrar">
-            <div v-show="mostrar2">
+        <!-- <template v-if="mostrar"> -->
+            <!-- <div v-show="mostrar2"> -->
                 <!-- <button v-on:click="incrementar">Incrementar</button>
                 <button @click="contador--">Decrementar</button> -->
                 <!-- <h1>{{titulo | uppercase}}</h1>
                 <h2>{{subtitulo | lowercase | uppercase}}</h2> -->
                 <!-- <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>   -->
                 <!-- Contador: {{contador}} -->
-                <input type="text" name="name" 
+                <!-- <input type="text" name="name" 
                         placeholder="Ingresa tu nombre"
                         v-model="name">
-                <p>Nombre en mayuscula {{name | uppercase}}</p>
+                <p>Nombre en mayuscula {{name | uppercase}}</p> -->
                 <form v-on:submit.prevent="submit" action="" method="GET">
                     <h2>Datos</h2>
-                    <input v-model="cursos" type="checkbox" id="vue" value="vue">
-                    <label for="vue">Curso de Vue.js</label>
-                    <input v-model="cursos" type="checkbox" id="seo" value="seo">
-                    <label for="seo">Curso de SEO</label>
-                    <input v-model="cursos" type="checkbox" id="react" value="react">
-                    <label for="react">Curso de React.js</label>
+                    <template v-for="curso in cursos">
+                        <input v-model="cursosSeleccionados" type="checkbox" v-bind:id="curso.value" v-bind:value="curso.value">
+                        <label v-bind:for="curso.value">Curso de {{curso.nombre}}</label>
+                        <!-- <input v-model="cursos" type="checkbox" id="seo" value="seo">
+                        <label for="seo">Curso de SEO</label>
+                        <input v-model="cursos" type="checkbox" id="react" value="react">
+                        <label for="react">Curso de React.js</label> -->
+                    </template>
                     <button type="submit">Enviar</button>
                 </form>
-            </div>
-        </template>
+            <!-- </div> -->
+        <!-- </template> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
@@ -47,7 +49,13 @@
                 mostrar2: true,
                 titulo: 'Este es mi titulo',
                 subtitulo: 'Este es mi subtitulo',
-                cursos: []
+                cursos: [
+                    {nombre: 'Vue.js', value: 'vue'},
+                    {nombre: 'SEO', value: 'seo'},
+                    {nombre: 'React.js', value: 'react'},
+                    {nombre: 'Marketing', value: 'marketing'}
+                ],
+                cursosSeleccionados: []
             }, 
             filters: {
                 uppercase: function(str) {
@@ -66,7 +74,7 @@
                 },
                 submit: function() {
                     console.log("On submit method");
-                    console.log(this.cursos);
+                    console.log(this.cursosSeleccionados);
                 }
             }
         })
